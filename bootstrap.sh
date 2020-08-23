@@ -12,6 +12,12 @@ function doQuietly() {
 function preFlight() {
     echo "\n=== 🚀 Running Pre-Flight Checks 🚀 === \n"
 
+    echo "🦄 Checking for local configuration..."
+    if [ ! -f ~/.localconfig ]; then
+        echo "\n🚨 Copying the .localconfig template to ~/.localconfig!\n"
+        cp ~/.dotfiles/localconfig.template ~/.localconfig;
+    fi
+
     echo "🔦 Looking for git..."
     if ! command -v git &> /dev/null; then
         echo "😳 Git binary is not on path!";
@@ -78,12 +84,18 @@ function doIt() {
         --exclude ".oh-my-zsh" \
         --exclude "README.md" \
         --exclude "LICENSE-MIT.txt" \
+        --exclude "localconfig.template" \
         -avh --no-perms ~/.dotfiles/ ~;
 
-    echo "\n🐚 Sourcing ZSH RC to update current shell...";
+    echo "\n🌈 Sourcing ZSH RC to update current shell...";
     # Temporarily disable autocompletion warnings.
     ZSH_DISABLE_COMPFIX=true;
     source ~/.zshrc;
+
+    echo "🦄 Sourcing ~/.localconfig for machine specific updates...";
+    if [ -f ~/.localconfig ]; then
+        source ~/.localconfig;
+    fi
 
     echo "🛡 Ensuring proper permissions on auto-complete directories...";
     auditOutput="$(compaudit)";
