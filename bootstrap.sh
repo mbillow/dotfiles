@@ -32,6 +32,19 @@ function preFlight() {
         esac
     fi
 
+    echo "🕵️ Checking for repo git configuration..."
+    if [ ! -d ~/.dotfiles/.git ]; then
+        returnTo=$PWD;
+        cd ~/.dotfiles;
+        echo "\n🕹 Configuring local git repo...";
+        doQuietly git init;
+        doQuietly git checkout -b primary;
+        doQuietly git remote add origin git@github.com:mbillow/dotfiles.git;
+        doQuietly git fetch --all;
+        doQuietly git reset --hard origin/primary;
+        cd "$returnTo";
+    fi
+
     if [ "$(uname)" = "Darwin" ]; then
         echo "🍺 Looking for brew...";
         if ! command -v brew &> /dev/null; then
@@ -73,7 +86,10 @@ function doIt() {
     source ~/.zshrc;
 
     echo "🛡 Ensuring proper permissions on auto-complete directories...";
-    compaudit | xargs chmod g-w,o-w;
+    auditOutput="$(compaudit)";
+    if [ ! -z "$auditOutput" ]; then
+        compaudit | xargs chmod g-w,o-w;
+    fi
     unset ZSH_DISABLE_COMPFIX;
     
     cd "$returnTo";
