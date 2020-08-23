@@ -47,7 +47,8 @@ function preFlight() {
 
 function doIt() {
     echo "\n=== 📥 Installing Dot Files 📥 === \n";
-    
+    returnTo="$PWD";
+    cd ~/.dotfiles;   
     echo "🌎 Fetching changes from remote repository..."
     doQuietly git pull origin primary > /dev/null 2>&1;
     echo "✨ Updating submodule libraries and themes..."
@@ -73,6 +74,8 @@ function doIt() {
     echo "🛡 Ensuring proper permissions on auto-complete directories...";
     compaudit | xargs chmod g-w,o-w;
     unset ZSH_DISABLE_COMPFIX;
+    
+    cd "$returnTo";
 
     echo "\n✅ Dot Files Pulled and Updated!\n"
 }

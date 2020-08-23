@@ -1,5 +1,5 @@
-export ZSH="/Users/mbillow/.dotfiles/.oh-my-zsh"
-export ZSH_CUSTOM="/Users/mbillow/.dotfiles/custom"
+export ZSH="$HOME/.dotfiles/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.dotfiles/custom"
 export SPACESHIP_VENV_SHOW="false"
 
 ZSH_THEME="spaceship"
@@ -14,7 +14,7 @@ export CLICOLOR=1
 
 # Go Setup
 export PATH=$PATH:/usr/local/go/bin
-export GOPATH=/Users/mbillow/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
