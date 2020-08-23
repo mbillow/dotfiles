@@ -2,7 +2,7 @@
 
 
 function doQuietly() {
-    "$@ > /dev/null 2>&1";
+    "$@" > /dev/null 2>&1;
     ret=$?
     if [ $ret != 0 ]; then
         echo "\n🤬 Command [ $@ ] failed with return code: $ret\n";
@@ -50,9 +50,10 @@ function doIt() {
     returnTo="$PWD";
     cd ~/.dotfiles;   
     echo "🌎 Fetching changes from remote repository..."
-    doQuietly git pull origin primary > /dev/null 2>&1;
+    doQuietly git pull origin primary;
     echo "✨ Updating submodule libraries and themes..."
-    doQuietly git submodule update --remote > /dev/null 2>&1;
+    doQuietly git submodule update --init --recursive;
+    doQuietly git submodule update --remote;
     echo "🏠 Synchronizing home directory:\n"
     rsync --exclude ".git/" \
         --exclude ".DS_Store" \
