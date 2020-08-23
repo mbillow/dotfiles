@@ -1,4 +1,4 @@
-# ~/mbillow/.dotfiles
+# ~mbillow/.dotfiles
 
 A simple repo with all of the things that make me feel at home.
 
