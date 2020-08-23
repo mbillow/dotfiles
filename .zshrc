@@ -37,7 +37,7 @@ _pyenv() {
   reply=(${(ps:\n:)completions})
 }
 
-if which pyenv-virtualenv-init > /dev/null; then
+if which pyenv-virtualenv-init > /dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)";
 fi
