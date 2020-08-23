@@ -7,8 +7,8 @@ A simple repo with all of the things that make me feel at home.
 Unless you are me, which you probably aren't, don't just blindly install this.
 
 ```
-curl -L https://github.com/mbillow/dotfiles/archive/primary.zip -output dotfiles.zip
-unzip dotfiles.zip 'dotfiles-primary' .dotfiles && rm dotfiles.zip
+curl -L https://github.com/mbillow/dotfiles/archive/primary.zip --output dotfiles.zip
+unzip -j dotfiles.zip 'dotfiles-primary/*' -d ~/.dotfiles && rm dotfiles.zip
 source .dotfiles/boostrap.sh
 ```
 

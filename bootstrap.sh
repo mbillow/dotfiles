@@ -63,7 +63,7 @@ function doIt() {
         --exclude ".oh-my-zsh" \
         --exclude "README.md" \
         --exclude "LICENSE-MIT.txt" \
-        -avh --no-perms . ~;
+        -avh --no-perms ~/.dotfiles ~;
 
     echo "\n🐚 Sourcing ZSH RC to update current shell...";
     # Temporarily disable autocompletion warnings.
