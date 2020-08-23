@@ -18,3 +18,7 @@
 	path = custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 	branch = master
+[submodule ".vim/pack/base/opt/onedark.vim"]
+	path = .vim/pack/base/opt/onedark.vim
+	url = https://github.com/joshdick/onedark.vim.git
+	branch = master
