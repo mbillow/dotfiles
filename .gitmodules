@@ -22,3 +22,7 @@
 	path = .vim/pack/base/opt/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
 	branch = master
+[submodule ".vim/pack/base/start/vim-hcl"]
+	path = .vim/pack/base/start/vim-hcl
+	url = https://github.com/jvirtanen/vim-hcl.git
+	branch = master
