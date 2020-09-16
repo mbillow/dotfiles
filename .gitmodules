@@ -26,3 +26,6 @@
 	path = .vim/pack/base/start/vim-hcl
 	url = https://github.com/droustchev/vim-hcl.git
 	branch = add-support-for-syntax-based-folding
+[submodule ".vim/pack/base/start/vim-puppet"]
+	path = .vim/pack/base/start/vim-puppet
+	url = git://github.com/rodjek/vim-puppet.git

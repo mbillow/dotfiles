@@ -144,6 +144,11 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+[pull]
+
+  # Don't automatically attempt to rebase divergent branches, attempt to merge.
+  rebase = false
+
 [push]
 
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
