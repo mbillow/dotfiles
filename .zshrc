@@ -1,6 +1,7 @@
 export ZSH="$HOME/.dotfiles/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.dotfiles/custom"
 export SPACESHIP_VENV_SHOW="false"
+export SPACESHIP_KUBECTL_SHOW="true"
 
 ZSH_THEME="spaceship"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
