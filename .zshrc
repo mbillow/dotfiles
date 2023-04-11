@@ -3,7 +3,16 @@ export ZSH_CUSTOM="$HOME/.dotfiles/custom"
 export SPACESHIP_VENV_SHOW="false"
 
 ZSH_THEME="spaceship"
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+SPACESHIP_DIR_COLOR="green"
+SPACESHIP_CHAR_COLOR_SUCCESS="cyan"
+if [[ "$TERM_PROGRAM" == "WarpTerminal" ]]; then
+  SPACESHIP_PROMPT_ASYNC="false"
+  SPACESHIP_PROMPT_ADD_NEWLINE="false"
+  SPACESHIP_PROMPT_SEPARATE_LINE="false"
+  SPACESHIP_CHAR_SYMBOL=" "
+else
+  plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
