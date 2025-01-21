@@ -5,6 +5,7 @@ export SPACESHIP_VENV_SHOW="false"
 ZSH_THEME="spaceship"
 SPACESHIP_DIR_COLOR="green"
 SPACESHIP_CHAR_COLOR_SUCCESS="cyan"
+SPACESHIP_DOCKER_CONTEXT_SHOW="false"
 if [[ "$TERM_PROGRAM" == "WarpTerminal" ]]; then
   SPACESHIP_PROMPT_ASYNC="false"
   SPACESHIP_PROMPT_ADD_NEWLINE="false"
@@ -65,4 +66,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Consul Autocomplete
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/consul consul
+complete -o nospace -C `which consul` consul
