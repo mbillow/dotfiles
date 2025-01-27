@@ -44,10 +44,10 @@ function preFlight() {
         cd ~/.dotfiles;
         echo "\n🕹 Configuring local git repo...";
         doQuietly git init;
-        doQuietly git checkout -b primary;
+        doQuietly git checkout -b main;
         doQuietly git remote add origin git@github.com:mbillow/dotfiles.git;
         doQuietly git fetch --all;
-        doQuietly git reset --hard origin/primary;
+        doQuietly git reset --hard origin/main;
         cd "$returnTo";
     fi
 
@@ -69,7 +69,7 @@ function doIt() {
     returnTo="$PWD";
     cd ~/.dotfiles;   
     echo "🌎 Fetching changes from remote repository..."
-    doQuietly git pull origin primary;
+    doQuietly git pull origin main;
     echo "✨ Updating submodule libraries and themes..."
     doQuietly git submodule update --init --recursive;
     doQuietly git submodule update --remote;
