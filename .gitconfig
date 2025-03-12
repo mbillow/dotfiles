@@ -134,6 +134,11 @@
 	# Use `hexdump` to diff binary files.
 	textconv = hexdump -v -C
 
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
 [help]
 
 	# Automatically correct and execute mistyped commands.
@@ -155,6 +160,8 @@
 	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+	# Auto setup remote for new branches on push
+	autoSetupRemote = true
 
 # URL shorthands
 
