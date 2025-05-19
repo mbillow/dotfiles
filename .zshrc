@@ -29,6 +29,9 @@ export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
 # Command Aliases
+if type "kubecolor" > /dev/null; then
+  alias kubectl="kubecolor"
+fi
 alias k="kubectl"
 alias kns="kubectl config set-context"
 if ! command -v COMMAND &> /dev/null; then
