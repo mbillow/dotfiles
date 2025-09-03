@@ -88,7 +88,10 @@ function doIt() {
         --exclude "localconfig.template" \
         -avh --no-perms ~/.dotfiles/ ~;
 
-    echo "\n🌈 Sourcing ZSH RC to update current shell...";
+    echo "\n📜 Installing fonts...";
+    doQuietly cp ~/.dotfiles/fonts/* ~/Library/Fonts
+
+    echo "🌈 Sourcing ZSH RC to update current shell...";
     # Temporarily disable autocompletion warnings.
     ZSH_DISABLE_COMPFIX=true;
     source ~/.zshrc;
