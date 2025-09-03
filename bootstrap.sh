@@ -78,6 +78,7 @@ function doIt() {
         --exclude ".DS_Store" \
         --exclude ".osx" \
         --exclude "custom" \
+        --exclude "fonts" \
         --exclude ".gitmodules" \
         --exclude "bootstrap.sh" \
         --exclude ".tmux-themepack" \
