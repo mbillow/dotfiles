@@ -1,0 +1,21 @@
+{{ if .work -}}
+#!/bin/bash
+
+# Trigger re-run when shell configs change:
+# dot_zshrc.tmpl hash: {{ include "dot_zshrc.tmpl" | sha256sum }}
+# dot_zprofile hash: {{ include "dot_zprofile" | sha256sum }}
+
+if [ -x "$HOME/env/bin/update-managed-repos" ]; then
+  echo "Running update-managed-repos..."
+  "$HOME/env/bin/update-managed-repos"
+else
+  echo "update-managed-repos not found, bootstrapping system-setup..."
+  curl -L https://system-setup.sandbox.indeed.net/bootstrap > /tmp/system-setup
+  bash /tmp/system-setup
+fi
+
+if [ -x "$HOME/indeed/system-setup/bin/system-setup" ]; then
+  echo "Running system-setup..."
+  "$HOME/indeed/system-setup/bin/system-setup"
+fi
+{{ end -}}

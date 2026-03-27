@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Create symlink for spaceship-prompt theme so oh-my-zsh can find it
+THEME_DIR="$HOME/.oh-my-zsh/custom/themes"
+LINK="$THEME_DIR/spaceship.zsh-theme"
+TARGET="spaceship-prompt/spaceship.zsh-theme"
+
+if [ -d "$THEME_DIR/spaceship-prompt" ] && [ ! -L "$LINK" ]; then
+  ln -sf "$TARGET" "$LINK"
+fi

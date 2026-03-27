@@ -1,0 +1,48 @@
+[".oh-my-zsh"]
+  type = "archive"
+  url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/themes/spaceship-prompt"]
+  type = "archive"
+  url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+  type = "archive"
+  url = "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+  type = "archive"
+  url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".vim/pack/base/opt/onedark.vim"]
+  type = "archive"
+  url = "https://github.com/joshdick/onedark.vim/archive/main.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".vim/pack/base/start/vim-hcl"]
+  type = "archive"
+  url = "https://github.com/droustchev/vim-hcl/archive/add-support-for-syntax-based-folding.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".config/tmux/plugins/tmux-dotbar"]
+  type = "archive"
+  url = "https://github.com/vaaleyard/tmux-dotbar/archive/main.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"

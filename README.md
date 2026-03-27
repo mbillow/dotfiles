@@ -1,19 +1,34 @@
 # ~mbillow/.dotfiles
 
 A simple repo with all of the things that make me feel at home.
+Managed with [chezmoi](https://www.chezmoi.io/).
 
-# Installation
+## Installation
 
-Unless you are me, which you probably aren't, don't just blindly install this.
+Install [chezmoi](https://www.chezmoi.io/install/) if you don't have it:
 
 ```
-curl -L https://github.com/mbillow/dotfiles/archive/primary.zip --output dotfiles.zip
-unzip -j dotfiles.zip 'dotfiles-primary/*' -d ~/.dotfiles && rm dotfiles.zip
-source .dotfiles/boostrap.sh
+brew install chezmoi
 ```
 
-# Special Thanks
+Then initialize and apply:
 
-I used [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles) as a springboard
-for `bootstrap.sh`.
+```
+chezmoi init --apply mbillow/dotfiles
+```
 
+You'll be prompted for your git name, email, and whether this is a work machine.
+
+## What's Included
+
+- **Shell**: zsh with oh-my-zsh, spaceship-prompt, autosuggestions, syntax highlighting
+- **Editor**: vim with onedark colorscheme and HCL syntax support
+- **Terminal**: ghostty config with OneDark/OneLight themes
+- **Multiplexer**: tmux with dotbar status theme
+- **Git**: aliases, sane defaults, URL shorthands
+
+## Updating
+
+```
+chezmoi update
+```

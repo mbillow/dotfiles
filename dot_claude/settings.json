@@ -1,0 +1,82 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(tmux rename-window:*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "cli-tools@common-plugin-marketplace": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    }
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Consulting the Marauder's Map",
+      "Brewing Polyjuice Potion",
+      "Searching the Restricted Section",
+      "Casting Lumos on the problem",
+      "Traversing the Floo Network",
+      "Decoding ancient runes",
+      "Consulting Dumbledore's Pensieve",
+      "Casting Accio",
+      "Warding off Dementors",
+      "Reading the Daily Prophet",
+      "Apparating to a solution",
+      "Brewing Felix Felicis",
+      "Consulting the Room of Requirement",
+      "Reading the tea leaves",
+      "Pressing the knot on the Whomping Willow",
+      "Asking Nearly Headless Nick",
+      "Deciphering Tom Riddle's diary",
+      "Escaping Gringotts on a dragon",
+      "Consulting Ollivander on wand selection",
+      "Casting Expecto Patronum",
+      "Navigating the Triwizard maze",
+      "Asking Dobby for assistance",
+      "Gazing into the Mirror of Erised",
+      "Exploring Diagon Alley",
+      "Brewing Veritaserum",
+      "Infiltrating the Ministry of Magic",
+      "Spinning Hermione's Time-Turner",
+      "Decoding parseltongue",
+      "Asking the Hogwarts portraits",
+      "Traversing Platform Nine and Three-Quarters",
+      "Consulting Professor Trelawney",
+      "Hunting for Horcruxes",
+      "Casting Wingardium Leviosa",
+      "Uniting the Deathly Hallows",
+      "Awaiting the Goblet of Fire's selection",
+      "Asking Moaning Myrtle",
+      "Unleashing Peeves",
+      "Casting Alohomora",
+      "Browsing Flourish and Blotts",
+      "Counting Dobby's socks",
+      "Riding the Knight Bus",
+      "Asking the Fat Lady for the password",
+      "Infiltrating the Department of Mysteries",
+      "Brewing Amortentia",
+      "Checking for Dark Marks",
+      "Owling the answer",
+      "Heeding the Sorting Hat's counsel",
+      "Seeking the Founders' Relics",
+      "Asking the Headmaster's portrait",
+      "Casting Revelio"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+# Base formulae
+brew "bash"
+brew "bash-completion"
+brew "chezmoi"
+brew "cmake"
+brew "diffutils"
+brew "entr"
+brew "findutils"
+brew "gawk"
+brew "git"
+brew "git-lfs"
+brew "gnu-indent"
+brew "gnu-sed"
+brew "gnu-tar"
+brew "gnu-which"
+brew "gnupg"
+brew "grep"
+brew "gzip"
+brew "htop"
+brew "httpie"
+brew "jq"
+brew "perl"
+brew "pipx"
+brew "pyenv-virtualenv"
+brew "rsync"
+brew "ssh-copy-id"
+brew "tmux"
+brew "watch"
+brew "wdiff"
+brew "wget"
+brew "zlib"
+brew "ffmpeg"
+
+# Base casks
+cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
+cask "orbstack"
+
+{{ if .work -}}
+# Work formulae
+brew "atlassian/acli/acli"
+brew "awscli"
+brew "binutils"
+brew "cpanminus"
+brew "ed"
+brew "glab"
+brew "hashicorp/tap/consul"
+brew "hashicorp/tap/vault"
+brew "kind"
+brew "kubecolor"
+brew "kubernetes-cli"
+brew "localstack/tap/localstack-cli"
+brew "openldap"
+brew "postgresql@18"
+brew "snappy"
+brew "steipete/tap/gogcli"
+brew "tcptraceroute"
+brew "virtualenv"
+brew "xmlstarlet"
+
+# Work casks
+cask "supacode"
+{{ end -}}
+EOF
+{{ end -}}
