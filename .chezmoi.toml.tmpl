@@ -2,8 +2,6 @@
 {{- $email := promptStringOnce . "email" "Git author email" -}}
 {{- $work := promptBoolOnce . "work" "Is this a work machine" -}}
 
-sourceDir = "~/.dotfiles"
-
 [data]
   name = {{ $name | quote }}
   email = {{ $email | quote }}

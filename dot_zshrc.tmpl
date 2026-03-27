@@ -1,5 +1,5 @@
-export ZSH="$HOME/.dotfiles/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/.dotfiles/custom"
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 export SPACESHIP_VENV_SHOW="false"
 
 ZSH_THEME="spaceship"
@@ -21,6 +21,7 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='vim'
 export CLICOLOR=1
+export PATH=$HOME/.local/bin:$PATH
 
 # Go Setup
 export PATH=$PATH:/usr/local/go/bin
@@ -70,3 +71,42 @@ export NVM_DIR="$HOME/.nvm"
 # Consul Autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C `which consul` consul
+
+{{ if .work -}}
+# Work: krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Work: nested cloning for Indeed projects
+ic() {
+  prefix="git@code.corp.indeed.com:"
+  suffix=".git"
+  without_prefix=${1/#$prefix}
+  project=${without_prefix/%$suffix}
+  cdir="$HOME/indeed/${project}"
+  cglu="git@code.corp.indeed.com:${project}.git"
+  printf "\033[37;1m  New Indeed Project\033[0m\n\033[31;1m From:\033[0m ${cglu} \n\033[36;1m To:\033[0m ${cdir}\n"
+  mkdir -p "${cdir}"
+  git clone "${cglu}" "${cdir}"
+  printf "\033[32;1mProject Cloned!\033[0m Happy development.\n"
+}
+
+# Work: quickshare
+qs() {
+  url="https://quickshare.sandbox.indeed.net"
+  local ttl="${1:-1h}"
+  local data="${2}"
+  if [ -z "$data" ]; then
+    if [ -t 0 ]; then
+      echo "Enter data (press Ctrl+D when finished):"
+    fi
+    data=$(cat)
+  fi
+  local response=$(curl -s -X POST \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    --data-urlencode "data=$data" \
+    --data-urlencode "ttl=$ttl" \
+    "${url}/w")
+  local token=$(echo $response | grep -m1 shareUrl | cut -d "\"" -f 4)
+  printf "\033[36;1m Created Quickshare:\033[0m ${url}/u/${token}\n"
+}
+{{ end -}}
