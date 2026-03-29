@@ -10,12 +10,37 @@ bold_cyan="\033[1;36m"
 bold_yellow="\033[1;33m"
 dim_white="\033[2;37m"
 magenta="\033[35m"
-green="\033[32m"
-cyan="\033[36m"
-yellow="\033[33m"
 
 connector() { printf "${dim_white}%s${reset}" "$1"; }
 append() { [ -n "$out" ] && out="$out "; out="$out$1"; }
+
+# Returns true if any of the given marker files exist in PWD,
+# or if any files matching the glob (last arg, prefixed with *) exist.
+has_project_files() {
+  local ext="$1"; shift
+  for f in "$@"; do [ -f "$PWD/$f" ] && return 0; done
+  set -- "$PWD"/*."$ext"
+  [ -f "$1" ]
+}
+
+# Returns ANSI color code for a usage percentage.
+usage_color() {
+  awk -v pct="$1" 'BEGIN {
+    if      (pct >= 90) print "\033[1;31m"  # red
+    else if (pct >= 75) print "\033[1;33m"  # bold yellow (closest to orange in 16-color)
+    else if (pct >= 50) print "\033[33m"    # yellow
+    else                print "\033[1;32m"  # green
+  }'
+}
+
+# Formats a rate-limit badge: "5h[20%]" with colored percentage.
+format_limit() {
+  local label="$1" raw="$2"
+  local pct col
+  pct=$(printf '%.0f' "$raw")
+  col=$(usage_color "$pct")
+  printf "${bold_white}%s[${reset}${col}%s%%${reset}${bold_white}]${reset}" "$label" "$pct"
+}
 
 out=""
 
@@ -64,15 +89,7 @@ done
 # ---------------------------------------------------------------------------
 # Go version (only if project uses go)
 # ---------------------------------------------------------------------------
-go_project=false
-for f in go.mod go.sum Gopkg.toml; do
-  [ -f "$PWD/$f" ] && go_project=true && break
-done
-if ! $go_project; then
-  set -- "$PWD"/*.go
-  [ -f "$1" ] && go_project=true
-fi
-if $go_project; then
+if has_project_files go go.mod go.sum Gopkg.toml; then
   go_ver=$(go version 2>/dev/null | awk '{sub(/^go/, "v", $3); print $3}')
   if [ -n "$go_ver" ]; then
     append "$(connector 'via')"
@@ -83,15 +100,7 @@ fi
 # ---------------------------------------------------------------------------
 # Python version/venv (only if project uses python)
 # ---------------------------------------------------------------------------
-py_project=false
-for f in requirements.txt Pipfile pyproject.toml setup.py setup.cfg .python-version; do
-  [ -f "$PWD/$f" ] && py_project=true && break
-done
-if ! $py_project; then
-  set -- "$PWD"/*.py
-  [ -f "$1" ] && py_project=true
-fi
-if $py_project; then
+if has_project_files py requirements.txt Pipfile pyproject.toml setup.py setup.cfg .python-version; then
   active_venv="${VIRTUAL_ENV:-$PYENV_VIRTUAL_ENV}"
   if [ -n "$active_venv" ]; then
     append "$(connector 'via')"
@@ -107,8 +116,8 @@ if $py_project; then
 fi
 
 # ---------------------------------------------------------------------------
-# Claude: "using Sonnet 4.6 with 18% context and $0.75" (API billing)
-#      or "using Sonnet 4.6 with 18% context and 5h:12% | 7d:4%" (Pro/subscription)
+# Claude: "using Sonnet 4.6 with 18% context and 5h[12%] 7d[4%]" (Pro/subscription)
+#      or "using Sonnet 4.6 with 18% context and $0.75" (API/enterprise billing)
 # All fields extracted in a single jq call.
 # ---------------------------------------------------------------------------
 { read -r model_display; read -r used_pct; read -r cost_usd; read -r limit_5h; read -r limit_7d; } < <(
@@ -133,22 +142,22 @@ if [ -n "$model_short" ]; then
 
   if [ -n "$used_pct" ]; then
     append "$(connector 'with')"
-    append "$(printf "💭 ${bold_white}$(printf '%.0f' "$used_pct")%% context${reset}")"
+    append "$(printf "🌀 ${bold_cyan}$(printf '%.0f' "$used_pct")%% context${reset}")"
   fi
 
-  # Show cost on API/enterprise billing, or plan usage on Pro/subscription
-  if [ -n "$cost_usd" ] && awk "BEGIN{exit !($cost_usd > 0)}"; then
-    append "$(connector 'cost')"
-    append "$(printf "${bold_yellow}💰 \$%.2f${reset}" "$cost_usd")"
-  elif [ -n "$limit_5h" ] || [ -n "$limit_7d" ]; then
+  # Show plan usage on Pro/subscription; fall back to $ cost on API/enterprise billing
+  if [ -n "$limit_5h" ] || [ -n "$limit_7d" ]; then
     append "$(connector 'used')"
     limits=""
-    [ -n "$limit_5h" ] && limits="$(printf "${bold_white}5h:$(printf '%.0f' "$limit_5h")%%${reset}")"
+    [ -n "$limit_5h" ] && limits="$(format_limit '5h' "$limit_5h")"
     if [ -n "$limit_7d" ]; then
-      [ -n "$limits" ] && limits="$limits $(printf "${dim_white}|${reset}") "
-      limits="${limits}$(printf "${bold_white}7d:$(printf '%.0f' "$limit_7d")%%${reset}")"
+      [ -n "$limits" ] && limits="$limits "
+      limits="${limits}$(format_limit '7d' "$limit_7d")"
     fi
     append "$(printf "📊 %s" "$limits")"
+  elif [ -n "$cost_usd" ] && awk "BEGIN{exit !($cost_usd > 0)}"; then
+    append "$(connector 'cost')"
+    append "$(printf "${bold_yellow}💰 \$%.2f${reset}" "$cost_usd")"
   fi
 fi
 
