@@ -69,11 +69,11 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# Consul Autocomplete
+{{ if .work -}}
+# Work: autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C `which consul` consul
 
-{{ if .work -}}
 # Work: krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
