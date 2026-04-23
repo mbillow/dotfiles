@@ -38,6 +38,12 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+# Workaround for zpty dropping results from fast async jobs over SSH
+# https://github.com/spaceship-prompt/spaceship-prompt/issues/1193#issuecomment-1722579999
+if [[ -n "$SSH_CONNECTION" ]]; then
+  functions[_async_job]="${functions[_async_job]//setopt localoptions noxtrace/setopt localoptions noxtrace$'\n'  sleep 0.05}"
+fi
+
 # User configuration
 
 export EDITOR='vim'
