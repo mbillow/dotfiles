@@ -2,6 +2,7 @@ export TERM=xterm-256color
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 export SPACESHIP_VENV_SHOW="false"
+export SPACESHIP_AWS_SHOW="false"
 
 ZSH_THEME="spaceship"
 SPACESHIP_DIR_COLOR="green"
@@ -15,6 +16,8 @@ if [[ "$TERM_PROGRAM" == "WarpTerminal" ]]; then
 else
   plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 fi
+
+[[ -n "$SSH_CONNECTION" ]] && SPACESHIP_PROMPT_ASYNC="false"
 
 source $ZSH/oh-my-zsh.sh
 
