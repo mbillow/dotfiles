@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.os "linux" -}}
+# /etc/zsh/zprofile sources /etc/profile.d/*.sh, some of which call bash's
+# `complete` builtin directly. Stub it as a no-op so login doesn't error;
+# bashcompinit in .zshrc provides a real implementation when needed.
+complete() { :; }
+{{ end -}}
